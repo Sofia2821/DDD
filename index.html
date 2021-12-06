@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDD</title>
+</head>
+<body>
+	
+	<form action="">
+		<input type="text" id="DDD" placeholder="DDD" size="5"><br>
+		<input type="text" id="cidades" placeholder="Cidades" size="800" disabled>
+	</form>
+	
+<script>
+	document.querySelector("#DDD").addEventListener("change", buscaDados);
+    function buscaDados(evento){
+		fetch(`https://brasilapi.com.br/api/ddd/v1/${evento.target.value}`)
+		.then( resposta => resposta.json())	
+		.then(dados => {
+		   atribui('cidades', dados.cities);
+		});
+   }
+	
+	function atribui(id, valor){
+	  document.querySelector(`#${id}`).value = valor;
+	  }
+</script>
+	
+</body>
+</html>
