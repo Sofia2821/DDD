@@ -7,11 +7,9 @@
     <title>DDD</title>
 </head>
 <body>
-	
-	<form action="">
-		<input type="text" id="DDD" placeholder="DDD" size="5"><br>
-		<input type="text" id="cidades" placeholder="Cidades" size="800" disabled>
-	</form>
+    
+	<input type="text" id="DDD" placeholder="DDD" size="5">
+	<ul></ul>
 	
 <script>
 	document.querySelector("#DDD").addEventListener("change", buscaDados);
@@ -19,13 +17,23 @@
 		fetch(`https://brasilapi.com.br/api/ddd/v1/${evento.target.value}`)
 		.then( resposta => resposta.json())	
 		.then(dados => {
-		   atribui('cidades', dados.cities);
+		   atribui(dados.cities)
 		});
    }
 	
-	function atribui(id, valor){
-	  document.querySelector(`#${id}`).value = valor;
-	  }
+	function atribui(cidades){
+	   const tamanho = cidades.length;
+	   const lista = document.querySelector('ul');
+	   lista.innerHTML = "<ul></ul>"
+	    for (let i = 0; i < tamanho; i++){
+	      const item = document.createElement('li');
+		  item.textContent = cidades[i];
+		  lista.append(item);
+	      
+	   }
+	}   
+  
+	
 </script>
 	
 </body>
